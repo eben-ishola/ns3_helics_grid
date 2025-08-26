@@ -1,8 +1,9 @@
 FROM ubuntu:22.04
 
 RUN apt-get update && apt-get install -y \
-    cmake g++ git wget curl libboost-all-dev && \
-    rm -rf /var/lib/apt/lists/*
+    cmake g++ git wget curl libboost-all-dev \
+    libzmq3-dev pkg-config \
+ && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt
 
