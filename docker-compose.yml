@@ -4,6 +4,8 @@ services:
     container_name: helics_broker
     command: /run-broker.sh
     tty: true
+    networks:
+      - simnet
 
   ns3:
     build: ./ns3
@@ -11,10 +13,18 @@ services:
     depends_on:
       - helics
     tty: true
+    networks:
+      - simnet
 
   gridlabd:
-    image: gridlab/gridlab-d:latest   # ✅ using an image instead of build
+    build: ./gridlabd
     container_name: gridlabd_sim
     depends_on:
       - helics
     tty: true
+    networks:
+      - simnet
+
+networks:
+  simnet:
+    driver: bridge
